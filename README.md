@@ -1,3 +1,5 @@
+# ProjecteM12
+=======
 # M12-BookCatalog
 
 - [Primera versió: Gestió de Genres](https://github.com/rcervera/M12-BookCatalog/tree/5fffcdb0fb00d200797e3efef9b1e46363b52d84)
@@ -6,9 +8,6 @@
 
 - [Tercera versió: Gestió de TechnicalBooks: Alta](https://github.com/rcervera/M12-BookCatalog/tree/c7e4ba2bf9c5bb924fe3a67b50beb6eda1ba3862)
 
-
 - [Quarta versió: Gestió de TechnicalBooks: CRUD amb gestió errors, Sanitització, validació i reploblament forms](https://github.com/rcervera/M12-BookCatalog/tree/4cd9e5bd3ef62a71e579b64962a718d470018486)
 
-- [Cinquena versió: Genres: validació i paginació , seeders](https://github.com/rcervera/M12-BookCatalog/tree/4b46d7047328f32d0a7bbe2e2529b6b8aa06e9c6)
-
-- [Sisena versió: gestió de còpies dels llibres , autentificació i autorització amb rols](https://github.com/rcervera/M12-BookCatalog) 
+- [Cinquena versió: Genres: validació i paginació , seeders](https://github.com/rcervera/M12-BookCatalog)
