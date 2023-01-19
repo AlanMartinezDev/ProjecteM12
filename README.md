@@ -3,9 +3,6 @@
 
 MONGODB_URI=mongodb+srv://erga916:1615003e@cluster0.ev88ezk.mongodb.net/?retryWrites=true&w=majority
 
-SECRET = "secret"
-
-PORT=5000
 # M12-BookCatalog
 
 - [Primera versió: Gestió de Genres](https://github.com/rcervera/M12-BookCatalog/tree/5fffcdb0fb00d200797e3efef9b1e46363b52d84)
