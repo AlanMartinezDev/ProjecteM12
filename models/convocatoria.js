@@ -14,6 +14,6 @@ var ConvocatoriaSchema = new Schema({
     responsable: { type: Schema.ObjectId, ref: "Responsable" }
   });
   
-  ConvocatoriaSchema.plugin(mongoosePaginate);aaaaaaa
+  ConvocatoriaSchema.plugin(mongoosePaginate);
   // Export model.
   module.exports = mongoose.model("Convocatoria", ConvocatoriaSchema);
