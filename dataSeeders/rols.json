@@ -1,0 +1,11 @@
+{
+    "rols" : [
+        { "nom" : "administrador", "permissos" : [ "administrador" ] },
+        { "nom" : "professor" , "permissos" : [ "professor" ] },
+        { "nom" : "tutor" , "permissos" : [ "professor" ] },
+        { "nom" : "cap de departament" , "permissos" : [ "professor" ] },
+        { "nom" : "secretari" , "permissos" : [ "professor" ] },
+        { "nom" : "cap d'estudi" , "permissos" : [ "professor","directiva" ] },
+        { "nom" : "director" , "permissos" : [ "professor","directiva" ] }
+    ]
+}
