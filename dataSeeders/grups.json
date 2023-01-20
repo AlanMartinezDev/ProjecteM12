@@ -1,0 +1,6 @@
+{
+    "grups" : [
+        { "nom" : "Grup Públic", "tipus" : "public" },
+        { "nom" : "Grup Privat", "tipus" : "privat" }
+    ]
+}

@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({ 
   // Atributos Proyecto Ramón
+  /*
   fullname: { type: String, required: true },
   role: [{
     type: String,
@@ -12,6 +13,7 @@ var UserSchema = new Schema({
     ],
     default: "member"
   }],
+  */
   // Atributos de nuestro proyecto
   email: { type: String, required: true },
   password: { type: String, required: true },  
