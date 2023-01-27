@@ -43,7 +43,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log('Error esborrant dades...')
     }
 
-    var users = await User.insertMany(usersJSON.users);
+  
     var grups = await Grup.insertMany(grupsJSON.grups);
     var rols = await Rol.insertMany(rolsJSON.rols);
     var plantilles = await Plantilla.insertMany(plantillesJSON.plantilles);
@@ -55,8 +55,10 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     usersJSON.users[1].rol = [rols[0].id];
     usersJSON.users[2].rol = [rols[1].id];
 
-    // REVISAR PORQUE NO SE ENCRIPTAN LAS CONTRASEÑAS
+    
     for(var i =0; i<  usersJSON.users.length; i ++) {
       usersJSON.users[i].password =  await bcrypt.hash(usersJSON.users[i].password,12);
     }
+
+    var users = await User.insertMany(usersJSON.users);
 }
