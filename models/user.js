@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   cognom: { type: String, required: true },
   dni: { type: String, required: true },
   especialitat: { type: String, required: true },
-  grup: { type: Schema.ObjectId, ref: "Grup" },
+  grup: [{ type: Schema.ObjectId, ref: "Grup" }],
   rol: [{ type: Schema.ObjectId, ref: "Rol" }]
 });
 
