@@ -1,7 +1,7 @@
 {
     "rols" : [
         { "nom" : "administrador", "permissos" : [ "administrador" ] },
-        { "nom" : "professor" , "permissos" : [ "professor" ] },
+        { "nom" : "prof" , "permissos" : [ "professor" ] },
         { "nom" : "tutor" , "permissos" : [ "professor" ] },
         { "nom" : "cap de departament" , "permissos" : [ "professor" ] },
         { "nom" : "secretari" , "permissos" : [ "professor" ] },
