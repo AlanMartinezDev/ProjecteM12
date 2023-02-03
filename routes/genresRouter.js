@@ -4,7 +4,7 @@ var router = express.Router();
 
 const genre_controller = require("../controllers/genresController");
 
-router.use([middelware.isAuth,middelware.hasRole('librarian')]);
+router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 /*
 router.use(function (req, res, next) {
     //console.log(req.session.data.userId);

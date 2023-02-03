@@ -83,7 +83,7 @@ class authController {
                         'username': user.username,
                         'fullname': user.fullname,
                         'email': user.email,
-                        'rol': user.rol,                  
+                        'role': user.role,                  
                    }
 
                   req.session.data = userData
@@ -137,7 +137,7 @@ class authController {
           fullname: req.body.fullname,
           email: req.body.email,
           password: hashpwd,
-          rol: ["member"] 
+          role: ["professor"] 
         });
         
         User.create(user, (error, newUser) => {

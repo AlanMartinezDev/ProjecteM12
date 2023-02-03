@@ -4,8 +4,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 var Schema = mongoose.Schema;
 
 var ResponsableSchema = new Schema({
-    nom: { type: String, required: true },
-    rol: [{ type: Schema.ObjectId, ref: "Rol" }]
+    nom: { type: String, required: true }
   });
   
   ResponsableSchema.plugin(mongoosePaginate);

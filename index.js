@@ -79,8 +79,7 @@ app.use(function (req, res, next) {
      if(req.session.data) {
        res.locals.userId = req.session.data.userId;
        res.locals.fullname = req.session.data.fullname;
-       res.locals.rol = req.session.data.rol;
-       console.log(res.locals.rol)
+       res.locals.role = req.session.data.role;
         
      }
      next(); 
