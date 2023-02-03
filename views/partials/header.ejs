@@ -23,7 +23,7 @@
         </li>
       <% } else { %>  
         
-          <% if (locals.rol.includes('member')) { %>
+          <% if (locals.role.includes('professor')) { %>
             <li class="nav-item dropdown">          
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
@@ -43,7 +43,7 @@
           <% } %>
 
 
-          <% if (locals.rol.includes('lender')) { %>
+          <% if (locals.role.includes('directiu')) { %>
             <li class="nav-item dropdown">          
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
@@ -63,7 +63,7 @@
           <% } %>
 
        
-        <% if (locals.rol.includes('librarian')) { %>
+        <% if (locals.role.includes('administrador')) { %>
             <li class="nav-item dropdown">          
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
