@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({ 
   // Atributos Proyecto Ramón
+  /*
   fullname: { type: String, required: true },
   role: [{
     type: String,
@@ -12,6 +13,7 @@ var UserSchema = new Schema({
     ],
     default: "member"
   }],
+  */
   // Atributos de nuestro proyecto
   email: { type: String, required: true },
   password: { type: String, required: true },  
@@ -19,8 +21,14 @@ var UserSchema = new Schema({
   cognom: { type: String, required: true },
   dni: { type: String, required: true },
   especialitat: { type: String, required: true },
-  grup: { type: Schema.ObjectId, ref: "Grup" },
-  rol: [{ type: Schema.ObjectId, ref: "Rol" }]
+  grup: [{ type: Schema.ObjectId, ref: "Grup" }],
+  role: [{
+    type: String,
+    enum: [
+      "professor","directiu","administrador"     
+    ],
+    default: "professor"
+  }]
 });
 
 

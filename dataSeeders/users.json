@@ -2,54 +2,33 @@
     "users":[
         {
            
-            "fullname":"Joan Gracia Moreno",         
-            "role": ["librarian","lender","member"],        
-            "email":"librarian@librarian.com",         
-            "password": "librarian"
+            "nom" : "Eric",         
+            "cognom" : "García",        
+            "email" : "erga916@vidalibarraquer.net",         
+            "password" : "Admin1234@",
+            "dni" : "48029916M",   
+            "especialitat" : "Informàtica",   
+            "role" : "administrador"
         },
         {
            
-            "fullname":"Joana Quintana Soler",         
-            "role":"lender",        
-            "email":"lender@lender.com",         
-            "password": "lender"
+            "nom" : "Jesús",
+            "cognom" : "Paredes Melero",        
+            "email" : "jepa139@vidalibarraquer.net",         
+            "password" : "admin1234@",
+            "dni" : "49423139A",   
+            "especialitat" : "Informàtica",   
+            "role" : "directiu"
         },
         {
-         
-            "fullname":"Pere Gracia Fa",         
-            "role":"member",        
-            "email":"member@member.com",         
-            "password": "member"
-        },
-        {
-         
-            "fullname":"Sara Mas Farnús",         
-            "role":"member",        
-            "email":"member2@member.com",         
-            "password": "member2"
-        },
-        {
-         
-            "fullname":"Josep Talarn Silos",         
-            "role":"member",        
-            "email":"member3@member.com",         
-            "password": "member3"
-        },
-        {
-         
-            "fullname":"Carme Solanes Figueres",         
-            "role":"member",        
-            "email":"member4@member.com",         
-            "password": "member4"
-        },
-        {
-         
-            "fullname":"LluísDalmau Navarro",         
-            "role":"member",        
-            "email":"member5@member.com",         
-            "password": "member5"
+           
+            "nom" : "Alan",
+            "cognom" : "Martínez Mendiola",
+            "email" : "alma031@vidalibarraquer.net",
+            "password" : "admin@1234",
+            "dni" : "71695528C",
+            "especialitat" : "Informàtica",
+            "role" : "professor"
         }
-        
     ]
 }
-
