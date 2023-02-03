@@ -68,7 +68,7 @@
                             <p class="lead mt-2"><%= book.summary %></p>                  
                                                     
                         </div>
-                        <% if (locals.role.includes('lender')) { %>
+                        <% if (locals.role.includes('directiu')) { %>
                             <div class="card-footer">
                                 <% if(book.numItems>0) { %>
                                     <a href="/lend/selectitem/<%= book.id %>" class="btn btn-dark float-end position-relative m-3">

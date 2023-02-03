@@ -4,7 +4,7 @@ var router = express.Router();
 
 const borrow_controller = require("../controllers/borrowController");
 
-router.use([middelware.isAuth,middelware.hasRole('member')]);
+router.use([middelware.isAuth,middelware.hasRole('professor')]);
 
 router.get("/search", borrow_controller.bookList);
 router.get("/borrowlist", borrow_controller.borrowList); 
