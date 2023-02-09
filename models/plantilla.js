@@ -9,5 +9,5 @@ var PlantillaSchema = new Schema({
   });
   
   PlantillaSchema.plugin(mongoosePaginate);
-  // Export model.
+
   module.exports = mongoose.model("Plantilla", PlantillaSchema);
