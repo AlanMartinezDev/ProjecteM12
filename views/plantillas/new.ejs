@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body>
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+	<!--
+	<div class="row mt-5">
+		<div class="col p-5">
+			<h5>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					  <li class="breadcrumb-item"><a href="/plantillas" class="link-secondary">PLANTILLAS</a></li>
+					  <li class="breadcrumb-item active" aria-current="page">
+						<strong>NUEVA PLANTILLA</strong>
+					</li>
+					</ol>
+				</nav>
+				
+			</h5>
+			<p class="lead"> 
+				CREAR PLANTILLAS
+			</p>
+
+			<% if (typeof errors !== "undefined") { %>			
+				<div class="alert alert-danger mt-2" role="alert">		    <% errors.forEach(function(error) { %> 				   			<p><%= error.msg %></p>
+							<% }) %>
+				</div>
+			<% } %>
+		</div>
+		<div class="col">
+			<form method="POST" action="/plantillas/create">
+					<div class="mb-3">
+						<label class="form-label">NOMBRE</label>
+						<input type="text" name="name" class="form-control" value="<%= plantilla.nom %>">
+					</div>
+					<button type="submit" class="btn btn-primary">GUARDAR
+					</button>
+			</form>
+		</div>
+	</div>
+-->
+	<h1>Create New Plantilla</h1>
+	<% if (typeof errors !== 'undefined') { %>
+	<ul>
+		<% errors.forEach(function(error) { %>
+		<li><%= error.msg %></li>
+		<% }); %>
+	</ul>
+	<% } %>
+	<form action="/plantillas/new" method="post">
+	<div>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" value="<%= plantilla.nom %>">
+	</div>
+	<div>
+		<input type="submit" value="Create Plantilla">
+	</div>
+	</form>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
