@@ -41,15 +41,23 @@ class PlantillaController {
               res.render('plantillas/list',{result:result}) 
         }); 		        
     }
-
+/*
     static create_get(req, res, next) {
         var plantilla = {
           "nom" : "",
           //"puntsOrdreDia" : []
         }
         res.render('plantillas/new',{plantilla:plantilla});
-    }
-
+    }*/
+    static create_get(req, res, next) {
+      var plantilla = {
+        "nom" : "",
+        "puntsOrdreDia" : []
+      }
+      res.render('plantillas/new',{plantilla:plantilla});
+  }
+  
+/*
     static create_post(req, res,next) {
         const errors = validationResult(req);
       
@@ -72,7 +80,41 @@ class PlantillaController {
                   }
               })  
         }  
-    }
+    }*/
+
+    static create_post(req, res,next) {
+
+      console.log(req.body)
+      const errors = validationResult(req);
+    
+      if (!errors.isEmpty()) {
+        var plantilla = {
+          "nom" : req.body.name,
+          "puntsOrdreDia" : req.body.puntsOrdreDia
+        }
+        res.render('plantillas/new',{errors:errors.array(), plantilla:plantilla})
+      }
+      else {
+          var nom = req.body.name;
+          var puntsOrdreDia = req.body.puntsOrdreDia;
+    
+          var newPlantilla = new Plantilla({
+            nom: nom,
+            puntsOrdreDia: puntsOrdreDia
+          });
+    
+          newPlantilla.save(function (error)  {
+              if(error){
+                var err = new Error("There was a problem saving the new template.");
+                err.status = 404;
+                return next(err);
+              }else{             
+                  res.redirect('/plantillas')
+              }
+          });  
+      }  
+  }
+  
 
     static update_get(req, res, next) {
     
@@ -90,7 +132,7 @@ class PlantillaController {
           res.render("plantillas/update", { plantilla: plantilla });
       });
     }
-    
+    /*
     static update_post(req, res, next) {
       const errors = validationResult(req);
 
@@ -119,7 +161,41 @@ class PlantillaController {
             }
           );
       }
+    }*/
+    static update_post(req, res, next) {
+      const errors = validationResult(req);
+    
+      var plantilla = new Plantilla({
+        nom: req.body.name,
+        puntsOrdreDia: req.body.puntsOrdreDia,
+        _id: req.params.id,
+      });
+          
+      if (!errors.isEmpty()) {
+        res.render("plantillas/update", { plantilla: plantilla, errors:errors.array() });
+              
+      }
+      else {
+          Plantilla.findByIdAndUpdate(
+            req.params.id,
+            {
+              nom: req.body.name,
+              puntsOrdreDia: req.body.punts
+            },
+            {runValidators: true},
+            function (err, plantillaFound) {
+              if (err) {
+                //return next(err);
+                res.render("plantillas/update", { plantilla: plantilla, error: err.message });
+    
+              }          
+    
+              res.render("plantillas/update", { plantilla: plantilla, message: 'Plantilla Updated'});
+            }
+          );
+      }
     }
+    
 
    static async delete_get(req, res, next) {
       res.render('plantillas/delete',{id: req.params.id})
