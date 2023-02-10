@@ -19,7 +19,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(
     function () {
-      console.log('Mongoose connection open'); 
+      console.log('BASE DE DATOS CONECTADA'); 
 
       seeder().then( function() {
         mongoose.connection.close();
