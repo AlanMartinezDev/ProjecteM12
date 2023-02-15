@@ -22,7 +22,13 @@ var UserSchema = new Schema({
   dni: { type: String, required: true },
   especialitat: { type: String, required: true },
   grup: [{ type: Schema.ObjectId, ref: "Grup" }],
-  rol: [{ type: Schema.ObjectId, ref: "Rol" }]
+  role: [{
+    type: String,
+    enum: [
+      "professor","directiu","administrador"     
+    ],
+    default: "professor"
+  }]
 });
 
 

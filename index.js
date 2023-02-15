@@ -9,6 +9,7 @@ var publisherRouter = require('./routes/publisherRouter');
 var technicalBookRouter = require('./routes/technicalBookRouter');
 var authRouter = require('./routes/authRouter'); 
 var lendRouter = require('./routes/lendRouter'); 
+var plantillasRouter = require('./routes/plantillasRouter'); 
 var borrowRouter = require('./routes/borrowRouter'); 
 
 
@@ -80,7 +81,6 @@ app.use(function (req, res, next) {
        res.locals.userId = req.session.data.userId;
        res.locals.fullname = req.session.data.fullname;
        res.locals.role = req.session.data.role;
-       console.log(res.locals.role)
         
      }
      next(); 
@@ -94,6 +94,7 @@ app.get('/',function(req, res) {
 
 app.use('/home', indexRouter);
 app.use('/genres', genresRouter);
+app.use('/plantillas', plantillasRouter);
 app.use('/publisher', publisherRouter);
 app.use('/technicalbook', technicalBookRouter);
 app.use('/auth', authRouter);

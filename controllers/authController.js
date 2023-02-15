@@ -77,7 +77,7 @@ class authController {
               res.render('users/login',{message:message});
              } else {            
                 if (bcrypt.compareSync(password, user.password)) {
-                  
+                  console.log(user)
                   var userData = {
                         'userId': user.id,                  
                         'username': user.username,
@@ -137,7 +137,7 @@ class authController {
           fullname: req.body.fullname,
           email: req.body.email,
           password: hashpwd,
-          role: ["member"] 
+          role: ["professor"] 
         });
         
         User.create(user, (error, newUser) => {

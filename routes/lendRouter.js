@@ -4,7 +4,7 @@ var router = express.Router();
 
 const lend_controller = require("../controllers/lendController");
 
-router.use([middelware.isAuth,middelware.hasRole('lender')]);
+router.use([middelware.isAuth,middelware.hasRole('directiu')]);
 
 router.get("/search", lend_controller.bookList);
 router.get("/selectitem/:id", lend_controller.itemList);

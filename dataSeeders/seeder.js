@@ -6,11 +6,9 @@ var mongoose = require('mongoose');
 
 var Grup = require("../models/grup");
 var Plantilla = require("../models/plantilla");
-var Rol = require("../models/rol");
 var User = require("../models/user");
 
 // Carregar dades de fitxers JSON
-var rolsJSON = require('./rols.json');
 var grupsJSON = require('./grups.json');
 var usersJSON = require('./users.json');
 var plantillesJSON = require('./plantilles.json');
@@ -36,7 +34,6 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     try {
         await User.collection.drop();
         await Grup.collection.drop();
-        await Rol.collection.drop();
         await Plantilla.collection.drop();
         
     } catch(error) {
@@ -45,7 +42,6 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 
   
     var grups = await Grup.insertMany(grupsJSON.grups);
-    var rols = await Rol.insertMany(rolsJSON.rols);
     var plantilles = await Plantilla.insertMany(plantillesJSON.plantilles);
    
     // REVISAR PORQUE NO SE ENLAZAN LOS ROLES CON LOS USUARIOS
