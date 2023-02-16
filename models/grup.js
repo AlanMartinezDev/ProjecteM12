@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 
 var GrupSchema = new Schema({
     nom: { type: String, required: true },
-    tipus: { type: String, required: true }
+    tipus: { type: String, required: true },
+    membres: [{ type: Schema.ObjectId, ref: "User" }]
   });
   
   GrupSchema.plugin(mongoosePaginate);

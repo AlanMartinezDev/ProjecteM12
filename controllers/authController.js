@@ -77,7 +77,6 @@ class authController {
               res.render('users/login',{message:message});
              } else {            
                 if (bcrypt.compareSync(password, user.password)) {
-                  console.log(user)
                   var userData = {
                         'userId': user.id,                  
                         'username': user.username,
