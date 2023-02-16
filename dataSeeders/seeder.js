@@ -40,7 +40,6 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log('Error esborrant dades...')
     }
 
-    var grups = await Grup.insertMany(grupsJSON.grups);
     var plantilles = await Plantilla.insertMany(plantillesJSON.plantilles);
 
     // REVISAR PORQUE NO SE ENCRIPTAN LAS CONTRASEÑAS
@@ -53,4 +52,9 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     }
 
     var users = await User.insertMany(usersJSON.users);
+
+    grupsJSON.grups[0].membres = [users[0].id];
+    grupsJSON.grups[1].membres = [users[1].id];
+
+    var grups = await Grup.insertMany(grupsJSON.grups);
 }
