@@ -209,7 +209,7 @@ class PlantillaController {
          err.status = 404;
          return next(err);
        }else{
-         res.redirect('/plantillas')
+         res.redirect('/plantillas');
        }
      }) 
    }

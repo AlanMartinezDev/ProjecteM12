@@ -1,6 +1,6 @@
 {
     "grups" : [
-        { "nom" : "Grup Públic", "tipus" : "public" },
-        { "nom" : "Grup Privat", "tipus" : "privat" }
+        { "nom" : "Grup Públic", "tipus" : "public", "membres" : [] },
+        { "nom" : "Grup Privat", "tipus" : "privat", "membres" : [] }
     ]
 }

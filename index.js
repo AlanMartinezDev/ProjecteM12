@@ -10,6 +10,7 @@ var technicalBookRouter = require('./routes/technicalBookRouter');
 var authRouter = require('./routes/authRouter'); 
 var lendRouter = require('./routes/lendRouter'); 
 var plantillasRouter = require('./routes/plantillasRouter'); 
+var grupsRouter = require('./routes/grupsRouter');
 var borrowRouter = require('./routes/borrowRouter'); 
 
 
@@ -71,11 +72,10 @@ app.get('/prova', [middleware1,middleware2],function(req, res) {
 
 
 const server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`SERVIDOR ESCUCHANDO EN EL PUERTO ${port}`);
 });
 
 app.use(function (req, res, next) {
-     console.log(req.session.data);
      
      if(req.session.data) {
        res.locals.userId = req.session.data.userId;
@@ -95,6 +95,7 @@ app.get('/',function(req, res) {
 app.use('/home', indexRouter);
 app.use('/genres', genresRouter);
 app.use('/plantillas', plantillasRouter);
+app.use('/grups', grupsRouter);
 app.use('/publisher', publisherRouter);
 app.use('/technicalbook', technicalBookRouter);
 app.use('/auth', authRouter);
