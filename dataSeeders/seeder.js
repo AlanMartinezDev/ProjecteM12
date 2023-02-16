@@ -40,19 +40,14 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log('Error esborrant dades...')
     }
 
-<<<<<<< HEAD
-  
-    var grups = await Grup.insertMany(grupsJSON.grups);
-=======
->>>>>>> fceb61e6495650834cfc0ad53608206a52a2919e
     var plantilles = await Plantilla.insertMany(plantillesJSON.plantilles);
    
     // REVISAR PORQUE NO SE ENLAZAN LOS ROLES CON LOS USUARIOS
-    console.log(usersJSON.users[0].rol);
+    /*console.log(usersJSON.users[0].rol);
     console.log(rols[6].nom);
     usersJSON.users[0].rol = [rols[6].id];
     usersJSON.users[1].rol = [rols[0].id];
-    usersJSON.users[2].rol = [rols[1].id];
+    usersJSON.users[2].rol = [rols[1].id];*/
 
     
     for(var i =0; i<  usersJSON.users.length; i ++) {

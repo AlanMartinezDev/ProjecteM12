@@ -38,14 +38,14 @@ class GrupController {
             .populate('membres')  // Carregar les dades de l'objecte Publisher amb el que està relacionat
             .exec(function (err, list) {
               // En cas d'error
-              /*
+              
               if (err) {
                 // Crea un nou error personalitzat
-                //var err = new Error("There was an unexpected problem retrieving your book list");
-                //err.status = 404;
+                var err = new Error("There was an unexpected problem retrieving your book list");
+                err.status = 404;
                 // i delega el seu tractament al gestor d'errors
                 return next(err);
-              } */
+              }
               console.log(list); // imprime los resultados en la consola para depurar
               // Tot ok: mostra el llistat
               return res.render('grups/list',{list:list})
