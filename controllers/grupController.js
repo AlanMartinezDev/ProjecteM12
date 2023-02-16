@@ -35,13 +35,13 @@ class GrupController {
     
     	static async list(req, res, next) {
         Grup.find()  
-            .populate('user')  // Carregar les dades de l'objecte Publisher amb el que està relacionat
+            .populate('membres')  // Carregar les dades de l'objecte Publisher amb el que està relacionat
             .exec(function (err, list) {
               // En cas d'error
               if (err) {
                 // Crea un nou error personalitzat
-                var err = new Error("There was an unexpected problem retrieving your book list");
-                err.status = 404;
+                //var err = new Error("There was an unexpected problem retrieving your book list");
+                //err.status = 404;
                 // i delega el seu tractament al gestor d'errors
                 return next(err);
               }
