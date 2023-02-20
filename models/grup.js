@@ -7,6 +7,8 @@ var GrupSchema = new Schema({
     nom: { type: String, required: true },
     tipus: { type: String, required: true },
     membres: [{ type: Schema.ObjectId, ref: "User" }]
+    //usamos el nombre de la posición/objeto del esquema para listar el contenido en la view
+    //usaremos membres para las funciones del controller
   });
   
   GrupSchema.plugin(mongoosePaginate);

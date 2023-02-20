@@ -41,14 +41,17 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     }
 
     var plantilles = await Plantilla.insertMany(plantillesJSON.plantilles);
+   
+    // REVISAR PORQUE NO SE ENLAZAN LOS ROLES CON LOS USUARIOS
+    /*console.log(usersJSON.users[0].rol);
+    console.log(rols[6].nom);
+    usersJSON.users[0].rol = [rols[6].id];
+    usersJSON.users[1].rol = [rols[0].id];
+    usersJSON.users[2].rol = [rols[1].id];*/
 
-    // REVISAR PORQUE NO SE ENCRIPTAN LAS CONTRASEÑAS
+    
     for(var i =0; i<  usersJSON.users.length; i ++) {
-      try {
-        usersJSON.users[i].password =  await bcrypt.hash(usersJSON.users[i].password,12);
-      } catch (error) {
-        console.log(error);
-      }
+      usersJSON.users[i].password =  await bcrypt.hash(usersJSON.users[i].password,12);
     }
 
     var users = await User.insertMany(usersJSON.users);
