@@ -119,14 +119,14 @@ class GrupController {
     {    
       // Crear un array amb únicament els autors emplenats
       const users = [];
-      req.body.user.forEach(function(user) {
+      req.body.membres.forEach(function(user) {
           if(user.name!="") 
             users.push(user);                            
       }); 
-      req.body.user = users;      
+      req.body.membres = users;      
 
       // Si no s'ha seleccionat cap checkbox  
-      if (typeof req.body.user === "undefined") req.body.user = [];
+      if (typeof req.body.membres === "undefined") req.body.membres = [];
             
       try {      
         // req.body.title=""; // Descomenta per generar un error per provar
