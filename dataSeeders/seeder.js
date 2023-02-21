@@ -56,7 +56,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 
     var users = await User.insertMany(usersJSON.users);
 
-    grupsJSON.grups[0].membres = [users[0].id];
+    grupsJSON.grups[0].membres = [users[0].id,users[2].id];
     grupsJSON.grups[1].membres = [users[1].id];
 
     var grups = await Grup.insertMany(grupsJSON.grups);
