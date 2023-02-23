@@ -5,13 +5,13 @@ var Schema = mongoose.Schema;
 
 var ConvocatoriaSchema = new Schema({
     data: { type: Date, required: true },
-    horaInici: { type: Time, required: true },
-    durada: { type: Integer, required: true },
+    horaInici: { type: Date, required: true },
+    durada: { type: Number, required: true },
     lloc: { type: String, required: true },
     puntsOrdreDia: [{ type: String, required: true }],
-    convocats: [{ type: Schema.ObjectId, ref: "User" }],
+    convocats: [{ type: Schema.ObjectId, ref: "Grup" }],
     plantilla: { type: Schema.ObjectId, ref: "Plantilla" },
-    responsable: { type: Schema.ObjectId, ref: "Responsable" }
+    //responsable: { type: Schema.ObjectId, ref: "Responsable" }
   });
   
   ConvocatoriaSchema.plugin(mongoosePaginate);
