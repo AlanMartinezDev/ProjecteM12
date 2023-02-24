@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var ConvocatoriaSchema = new Schema({
     data: { type: Date, required: true },
-    horaInici: { type: Date, required: true },
+    horaInici: { type: String, required: true },
     durada: { type: Number, required: true },
     lloc: { type: String, required: true },
     puntsOrdreDia: [{ type: String, required: true }],
