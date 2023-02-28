@@ -153,6 +153,136 @@ class convocatoriaController {
     }
   }
 
+  static async update_get(req, res, next) {
+
+    try {
+        const grups_list = await Grup.find();
+        const plantillas_list = await Plantilla.find();
+        const convocatoria = await Convocatoria.findById(req.params.id) 
+            .populate({
+              path: 'convocats',
+              model: 'Grup',
+          populate : {
+              path: 'membres',
+              model : 'User'
+          }})  // Carregar les dades de l'objecte Publisher amb el que està relacionat    
+          .populate('plantilla') 
+          
+        if (convocatoria == null) { // No results                
+          var err = new Error("Convocatoria not found");
+          err.status = 404;
+          return next(err);
+        }
+        // Successful, so render.
+        res.render("convocatorias/update", { 
+                  convo: convocatoria, 
+                  grupsList:grups_list,
+                  plantillasList:plantillas_list });
+        
+    }
+    catch(error) {
+      var err = new Error("There was an unexpected problem showing the selected convocatoria");
+      console.log(error)
+      err.status = 404;
+      next(err)
+    }
+    
+  }
+
+  static async update_post(req, res, next) {
+
+    try {
+
+      const grups_list = await Grup.find();
+      const plantillas_list = await Plantilla.find();
+
+      // Només desaré els autors que s'han emplenat!
+      const grups = [];
+      req.body.convocats.forEach(function(grup) {
+          if(grup!="") 
+            grups.push(grup);                            
+      });
+      
+      const punts = [];
+      req.body.puntsOrdreDia.forEach(function(punt) {
+          if(punt!="") 
+            punts.push(punt);                            
+      }); 
+
+      const convocatoria = new Convocatoria({
+          data: req.body.data,
+          horaInici: req.body.horaInici,
+          durada: req.body.durada,
+          lloc: req.body.lloc,
+          puntsOrdreDia: punts,
+          convocats: grups,
+          plantilla: req.body.plantilla,
+          _id: req.params.id, // This is required, or a new ID will be assigned!
+      });
+
+      if (typeof req.body.convocats === "undefined") req.body.convocats = [];
+      if (typeof req.body.puntsOrdreDia === "undefined") req.body.puntsOrdreDia = [];
+      
+
+      const errors = validationResult(req);
+        
+      if (!errors.isEmpty()) {
+                     
+          res.render('convocatorias/update',
+                { convo: convocatoria, 
+                  errors: errors.array(),
+                  grupsList:grups_list,
+                  plantillasList:plantillas_list });                 
+      }
+      else
+      {           
+        
+        Convocatoria.findByIdAndUpdate(
+            req.params.id,
+            convocatoria,
+            {},
+            function (err, updatedConvocatoria) {
+              if (err) {
+                return next(err);
+              }
+              res.render('convocatorias/update',
+                  { convo: convocatoria, 
+                    message: 'Convocatorias Updated',
+                    grupsList:grups_list,
+                    plantillasList:plantillas_list });
+            
+            });
+      }
+    }
+    catch(error) {
+      var err = new Error("There was an unexpected problem updating the convocatoria");
+      err.status = 404;
+      next(err)
+    }
+   
+  }
+
+  static delete_get(req, res, next) {
+
+    res.render("convocatorias/delete",{id: req.params.id});
+  
+  }
+
+  // Esborrar llibre de la base de dades
+  static async delete_post(req, res, next) {
+    
+    Convocatoria.findByIdAndRemove(req.params.id, function (error) { 
+      if(error){
+        var error = new Error("There was an unexpected problem deleting the convocatoria");
+        error.status = 404;
+        next(error)
+      }else{
+        
+        res.redirect('/convocatorias')
+      }
+    }) 
+  }
+
 }
 
 module.exports = convocatoriaController;

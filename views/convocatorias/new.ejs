@@ -52,7 +52,7 @@
                     <label for="convocats">Convocats</label>
                     <select name="convocats[]" multiple class="form-control">
                     <% grupsList.forEach(function(grup) { %>
-                        <option selected value="<%= grup.id %>"><%= grup.nom %></option>
+                        <option value="<%= grup.id %>"><%= grup.nom %></option>
                     <% }); %>
                     </select>
                 </div>
@@ -72,6 +72,7 @@
                 
 				<button type="submit" class="btn btn-primary">Save</button>
                 <button type="button" id="addOrdreDia" class="btn btn-secondary">Agregar Orden del Día</button>
+                <button type="button" id="deleteOrdreDia" class="btn btn-danger">Borrar Orden del Día</button>
 
 			</form>
 		</div>
@@ -93,6 +94,15 @@
           form.insertBefore(input, document.querySelector("button[type='submit']"));
           form.insertBefore(label, input);
         });
+    </script>
+    <script>
+      document.getElementById("deleteOrdreDia").addEventListener("click", function() {
+          let inputs = document.getElementsByName("puntsOrdreDia[]");
+          let lastInput = inputs[inputs.length-1];
+          let lastLabel = lastInput.previousSibling;
+          lastInput.remove();
+          lastLabel.remove();
+      });
     </script>
 
 </main>
