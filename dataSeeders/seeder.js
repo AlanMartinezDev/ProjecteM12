@@ -8,12 +8,14 @@ var Grup = require("../models/grup");
 var Plantilla = require("../models/plantilla");
 var User = require("../models/user");
 var Convocatoria = require("../models/convocatoria");
+var Acta = require("../models/acta");
 
 // Carregar dades de fitxers JSON
 var grupsJSON = require('./grups.json');
 var usersJSON = require('./users.json');
 var plantillesJSON = require('./plantilles.json');
 var convocatoriasJSON = require('./convocatorias.json');
+var actasJSON = require('./actas.json');
 
 //Guardar fecha y hora actual
 const currentDate = new Date();
@@ -43,6 +45,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
         await Grup.collection.drop();
         await Plantilla.collection.drop();
         await Convocatoria.collection.drop();
+        await Acta.collection.drop();
         
     } catch(error) {
         console.log('Error esborrant dades...')
@@ -82,4 +85,9 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     convocatoriasJSON.convocatorias[1].plantilla = plantilles[1].id;
 
     var convocatorias = await Convocatoria.insertMany(convocatoriasJSON.convocatorias);
+
+    actasJSON.actas[0].convocatoria = convocatorias[0].id;
+    actasJSON.actas[1].convocatoria = convocatorias[1].id;
+
+    var actas = await Acta.insertMany(actasJSON.actas);
 }
