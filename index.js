@@ -12,6 +12,7 @@ var lendRouter = require('./routes/lendRouter');
 var plantillasRouter = require('./routes/plantillasRouter'); 
 var grupsRouter = require('./routes/grupsRouter');
 var convocatoriasRouter = require('./routes/convocatoriasRouter');
+var actasRouter = require('./routes/actasRouter');
 var borrowRouter = require('./routes/borrowRouter'); 
 
 
@@ -98,6 +99,7 @@ app.use('/genres', genresRouter);
 app.use('/plantillas', plantillasRouter);
 app.use('/grups', grupsRouter);
 app.use('/convocatorias', convocatoriasRouter);
+app.use('/actas', actasRouter);
 app.use('/publisher', publisherRouter);
 app.use('/technicalbook', technicalBookRouter);
 app.use('/auth', authRouter);
