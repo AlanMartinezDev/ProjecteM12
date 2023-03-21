@@ -119,14 +119,14 @@ class GrupController {
     {    
       // Crear un array amb únicament els autors emplenats
       const users = [];
-      req.body.user.forEach(function(user) {
+      req.body.membres.forEach(function(user) {
           if(user.name!="") 
             users.push(user);                            
       }); 
-      req.body.user = users;      
+      req.body.membres = users;      
 
       // Si no s'ha seleccionat cap checkbox  
-      if (typeof req.body.user === "undefined") req.body.user = [];
+      if (typeof req.body.membres === "undefined") req.body.membres = [];
             
       try {      
         // req.body.title=""; // Descomenta per generar un error per provar
@@ -141,6 +141,116 @@ class GrupController {
     
     }
   }
+  
+  static async update_get(req, res, next) {
+
+    try {
+      const users_list = await User.find();
+      const grup = await Grup.findById(req.params.id) 
+                     .populate('membres');
+          
+        if (grup == null) { // No results                
+          var err = new Error("Grup not found");
+          err.status = 404;
+          return next(err);
+        }
+        // Successful, so render.
+        res.render("grups/update", { 
+                  grups: grup, 
+                  usersList:users_list });
+        
+    }
+    catch(error) {
+      var err = new Error("There was an unexpected problem showing the selected grup");
+      console.log(error)
+      err.status = 404;
+      next(err)
+    }
+    
+  }
+
+  static async update_post(req, res, next) {
+
+    try {
+
+      var users_list = await User.find();
+
+      // Només desaré els autors que s'han emplenat!
+      const users = [];
+      req.body.membres.forEach(function(user) {
+          if(user.name!="") 
+            users.push(user);                            
+      }); 
+              
+      const grup = new Grup({
+          nom: req.body.nom,
+          tipus: req.body.tipus,
+          membres: users,
+          _id: req.params.id, // This is required, or a new ID will be assigned!
+      });
+
+      // Si no s'ha seleccionat cap checkbox      
+      if (typeof req.body.membres === "undefined") req.body.membres = [];
+      
+
+      const errors = validationResult(req);
+        
+      if (!errors.isEmpty()) {
+                     
+          res.render('grups/update',
+                { grups: grup, 
+                  errors: errors.array(),
+                  usersList:users_list });                 
+      }
+      else
+      {           
+        
+        Grup.findByIdAndUpdate(
+            req.params.id,
+            grup,
+            {},
+            function (err, updatedGrup) {
+              if (err) {
+                return next(err);
+              }
+              res.render('grups/update',
+                  { grups: grup, 
+                    message: 'Grup Updated',
+                    usersList:users_list });
+            
+            });
+      }
+    }
+    catch(error) {
+      var err = new Error("There was an unexpected problem updating the grup");
+      err.status = 404;
+      next(err)
+    }
+   
+  }
+
+  // Mostrar formulari per confirmar esborrat
+  static delete_get(req, res, next) {
+
+    res.render("grups/delete",{id: req.params.id});
+  
+  }
+
+  // Esborrar llibre de la base de dades
+  static async delete_post(req, res, next) {
+    
+    Grup.findByIdAndRemove(req.params.id, function (error) { 
+      if(error){
+        var error = new Error("There was an unexpected problem deleting the grup");
+        error.status = 404;
+        next(error)
+      }else{
+        
+        res.redirect('/grups')
+      }
+    }) 
+  }
+
 }
 
 module.exports = GrupController;

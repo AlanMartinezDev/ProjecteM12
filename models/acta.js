@@ -4,9 +4,15 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 var Schema = mongoose.Schema;
 
 var ActaSchema = new Schema({
-    estat: { type: String, required: true },
+    estat: {
+      type: String,
+      enum: [
+        "Oberta","Tancada"     
+      ],
+      default: "Oberta"
+    },
     descripcions: [{ type: String, required: true }],
-    acords: [{ type: Schema.ObjectId, ref: "Acord" }],
+    //acords: [{ type: Schema.ObjectId, ref: "Acord" }],
     convocatoria: { type: Schema.ObjectId, ref: "Convocatoria" }
   });
   

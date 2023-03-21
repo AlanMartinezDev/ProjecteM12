@@ -11,37 +11,33 @@
 
 <main>
 	<div class="container">
-   	    <h1 class="display-3">Grups</h1>
+   	    <h1 class="display-3">Actas</h1>
 
 								 
 		<div class="table-responsive">		      	 
 		<table class="table table-striped ">
 	  		<thead>
 			    <tr>		      
-			      <th scope="col">Nom</th>
-			      <th scope="col">Tipus</th>
-			      <th scope="col">Membres</th>
+			      <th scope="col">Estat</th>
+			      <th scope="col">Descripcions</th>
+			      <th scope="col">Convocatoria</th>
 			      <th scope="col">			      	
-				      <a href="/grups/create" class="btn btn-primary">New</a>
+				      <a href="/actas/create" class="btn btn-primary">New</a>
 			      </th>
 			    </tr>
 	  	</thead>
 		  	<tbody>
-		  		<% list.forEach(function(grup) { %>
+		  		<% list.forEach(function(acta) { %>
 				    <tr>		      
-				      <td><%= grup.nom %></td>
-				      <td><%= grup.tipus %></td>
+				      <td><%= acta.estat %></td>
 				      <td>
-				      			
-				      			<% grup.membres.forEach(function(usuario) { %>
-				      				  <span class="badge text-bg-secondary"><%= usuario.nom %>, <%= usuario.cognom %></span>
-
-				      					
-				      			<% }); %>
-				      		
-				      </td>
+                        <% acta.descripcions.forEach(function(desc) { %>
+                            <span class="badge text-bg-secondary"><%= desc %></span>    
+                        <% }); %>
+                      </td>
+				      <td><%= acta.convocatoria.lloc %></td>
 				      <td>
-				      	<a href="/grups/update/<%=grup._id%>" class="btn btn-secondary">Edit</a>
+				      	<a href="/actas/update/<%=acta._id%>" class="btn btn-secondary">Edit</a>
 				      	
 				      </td>		      
 				    </tr>

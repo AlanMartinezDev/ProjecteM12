@@ -7,11 +7,20 @@ var mongoose = require('mongoose');
 var Grup = require("../models/grup");
 var Plantilla = require("../models/plantilla");
 var User = require("../models/user");
+var Convocatoria = require("../models/convocatoria");
+var Acta = require("../models/acta");
 
 // Carregar dades de fitxers JSON
 var grupsJSON = require('./grups.json');
 var usersJSON = require('./users.json');
 var plantillesJSON = require('./plantilles.json');
+var convocatoriasJSON = require('./convocatorias.json');
+var actasJSON = require('./actas.json');
+
+//Guardar fecha y hora actual
+const currentDate = new Date();
+const isoDate = currentDate.toISOString().slice(0, 10); // obtiene la fecha en formato ISO 8601
+//const isoTime = currentDate.toISOString().slice(11, 16); // obtiene la hora en formato ISO 8601
 
 var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -35,6 +44,8 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
         await User.collection.drop();
         await Grup.collection.drop();
         await Plantilla.collection.drop();
+        await Convocatoria.collection.drop();
+        await Acta.collection.drop();
         
     } catch(error) {
         console.log('Error esborrant dades...')
@@ -56,8 +67,27 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 
     var users = await User.insertMany(usersJSON.users);
 
-    grupsJSON.grups[0].membres = [users[0].id];
+    grupsJSON.grups[0].membres = [users[0].id,users[2].id];
     grupsJSON.grups[1].membres = [users[1].id];
 
     var grups = await Grup.insertMany(grupsJSON.grups);
+
+    convocatoriasJSON.convocatorias[0].data = currentDate;
+    //convocatoriasJSON.convocatorias[0].horaInici = currentDate;
+   convocatoriasJSON.convocatorias[0].horaInici = "09:10";
+    convocatoriasJSON.convocatorias[0].convocats = grups[0].id;
+    convocatoriasJSON.convocatorias[0].plantilla = plantilles[0].id;
+
+    convocatoriasJSON.convocatorias[1].data = currentDate;
+    //convocatoriasJSON.convocatorias[1].horaInici = currentDate;
+    convocatoriasJSON.convocatorias[1].horaInici = "08:10";
+    convocatoriasJSON.convocatorias[1].convocats = grups[1].id;
+    convocatoriasJSON.convocatorias[1].plantilla = plantilles[1].id;
+
+    var convocatorias = await Convocatoria.insertMany(convocatoriasJSON.convocatorias);
+
+    actasJSON.actas[0].convocatoria = convocatorias[0].id;
+    actasJSON.actas[1].convocatoria = convocatorias[1].id;
+
+    var actas = await Acta.insertMany(actasJSON.actas);
 }
