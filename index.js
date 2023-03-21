@@ -5,17 +5,11 @@ var session = require('express-session');
 var favicon = require('serve-favicon');
 
 var indexRouter = require('./routes/indexRouter');
-var genresRouter = require('./routes/genresRouter');
-var publisherRouter = require('./routes/publisherRouter');
-var technicalBookRouter = require('./routes/technicalBookRouter');
 var authRouter = require('./routes/authRouter'); 
-var lendRouter = require('./routes/lendRouter'); 
 var plantillasRouter = require('./routes/plantillasRouter'); 
 var grupsRouter = require('./routes/grupsRouter');
 var convocatoriasRouter = require('./routes/convocatoriasRouter');
 var actasRouter = require('./routes/actasRouter');
-var borrowRouter = require('./routes/borrowRouter'); 
-
 
 var app = express();
 
@@ -49,12 +43,8 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/public')));
-
-
-
 
 function middleware1(req, res, next) {
      console.log('middelware 1')
@@ -65,17 +55,6 @@ function middleware2(req, res, next) {
      console.log('middelware 2')
      next(); 
 }
-
-// app.use(middleware1);
-// app.use(middleware2);
-/*
-app.get('/prova', [middleware1,middleware2],function(req, res) {  
-  res.send('prova')
-});
-*/
-
-
-
 
 const server = app.listen(port, () => {
   console.log(`SERVIDOR ESCUCHANDO EN EL PUERTO ${port}`);
@@ -93,32 +72,16 @@ app.use(function (req, res, next) {
     
 });
 
-
 app.get('/',function(req, res) {  
      res.render('home')
 });
 
 app.use('/home', indexRouter);
-app.use('/genres', genresRouter);
 app.use('/plantillas', plantillasRouter);
 app.use('/grups', grupsRouter);
 app.use('/convocatorias', convocatoriasRouter);
 app.use('/actas', actasRouter);
-app.use('/publisher', publisherRouter);
-app.use('/technicalbook', technicalBookRouter);
 app.use('/auth', authRouter);
-app.use('/lend', lendRouter);
-app.use('/borrow', borrowRouter);
-
-/*
-const provaError = (err, req, res, next) => {
- 
-     console.log('Hi ha hagut un error!') 
-     next(err);
-}
-*/
-
-
 
 function errorResponder(err, req, res, next) {
  
@@ -127,7 +90,5 @@ function errorResponder(err, req, res, next) {
 
 // app.use(provaError)
 app.use(errorResponder)
-
-
 
 module.exports = app;
