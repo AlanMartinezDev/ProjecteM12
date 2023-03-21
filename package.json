@@ -1,5 +1,5 @@
 {
-  "name": "m12",
+  "name": "M12",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node dataSeeders/seeder.js"
   },
-  "author": "",
+  "author": "Musefa",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -22,6 +22,7 @@
     "luxon": "^3.2.1",
     "mongoose": "^6.6.1",
     "mongoose-paginate-v2": "^1.7.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "serve-favicon": "^2.5.0"
   }
 }
