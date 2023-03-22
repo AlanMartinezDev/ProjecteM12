@@ -64,7 +64,8 @@ app.use(function (req, res, next) {
      
      if(req.session.data) {
        res.locals.userId = req.session.data.userId;
-       res.locals.fullname = req.session.data.fullname;
+       res.locals.nom = req.session.data.nom;
+       res.locals.cognom = req.session.data.cognom;
        res.locals.role = req.session.data.role;
         
      }

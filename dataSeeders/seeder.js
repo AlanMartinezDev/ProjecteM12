@@ -74,7 +74,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 
     convocatoriasJSON.convocatorias[0].data = currentDate;
     //convocatoriasJSON.convocatorias[0].horaInici = currentDate;
-   convocatoriasJSON.convocatorias[0].horaInici = "09:10";
+    convocatoriasJSON.convocatorias[0].horaInici = "09:10";
     convocatoriasJSON.convocatorias[0].convocats = grups[0].id;
     convocatoriasJSON.convocatorias[0].plantilla = plantilles[0].id;
 
