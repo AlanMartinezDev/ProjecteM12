@@ -8,6 +8,12 @@
       const deleteOrdreDiaButton = document.getElementById('deleteOrdreDia');
       let count = document.querySelectorAll('input[name="punts"]').length;
 
+      function attachDeleteEventListener(deleteButton) {
+        deleteButton.addEventListener('click', function() {
+          this.parentElement.remove();
+        });
+      }
+
       addOrdreDiaButton.addEventListener('click', function() {
         const newOrdreDiaDiv = document.createElement('div');
         newOrdreDiaDiv.className = 'ordre-dia-wrapper';
@@ -25,9 +31,7 @@
         deleteButton.type = 'button';
         deleteButton.className = 'btn btn-danger mt-2';
         deleteButton.innerText = 'Borrar Orden del Día';
-        deleteButton.addEventListener('click', function() {
-          this.parentElement.remove();
-        });
+        attachDeleteEventListener(deleteButton);
 
         newOrdreDiaDiv.appendChild(label);
         newOrdreDiaDiv.appendChild(input);
@@ -42,6 +46,8 @@
           count--;
         }
       });
+      const existingDeleteButtons = document.querySelectorAll('.btn.btn-danger.mt-2');
+      existingDeleteButtons.forEach(attachDeleteEventListener);
     });
   </script>
 </head>
@@ -57,13 +63,13 @@
     <form method="POST" action="/plantillas/update/<%= plantilla._id %>">
       <div class="mb-3">
         <label class="form-label">NOMBRE</label>
-        <input type="text" name="name" class="form-control" value="<%= plantilla.nom %>">
+        <input type="text" name="name" class="form-control" value="<%- htmlDecode(plantilla.nom) %>">
         <br>
         <div id="ordres-dia-container">
           <% var count = 1; plantilla.puntsOrdreDia.forEach(function(puntsOrdreDia) { %>
             <div class="ordre-dia-wrapper">
               <label class="form-label">ORDRE DEL DIA <%= count %></label>
-              <input type="text" name="punts" class="form-control" value="<%= puntsOrdreDia %>">
+              <input type="text" name="punts" class="form-control" value="<%= htmlDecode(puntsOrdreDia) %>">
               <button type="button" class="btn btn-danger mt-2">Borrar Orden del Día</button>
             </div>
             <% count++; %>
