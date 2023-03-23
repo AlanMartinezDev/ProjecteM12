@@ -20,6 +20,11 @@
     <header>
         <%- include('../partials/header'); %>
     </header>
+    <!--
+    <% if (typeof user === "undefined") { %>
+        <% var user = { nom: "", cognom: "", email: "" } %>
+    <% } %>
+    -->
     <div class="container">        
         <div class="row">
             <div class="col p-5 imagebg mt-4 p-4">
@@ -31,22 +36,25 @@
             <div class="col">
                 <div class="login-form bg-light mt-4 p-4">
 
-                    <form method="POST" action="/auth/register" class="row g-3">
-                                               
+                    <form method="POST" action="/auth/register" class="row g-3"> 
                         <div class="col-12">
-                             <label for="fullname">Fullname</label>
-                             <input type="text" name="fullname" value="<%= user.fullname %>" class="form-control" placeholder="fullname">
+                             <label for="nom">Nom</label>
+                             <input type="text" name="nom" value="<%= user.nom %>" class="form-control" placeholder="nom">
                         </div>
                         <div class="col-12">
-                             <label for="email">email</label>
+                            <label for="cognom">Cognom</label>
+                            <input type="text" name="cognom" value="<%= user.cognom %>" class="form-control" placeholder="cognom">
+                       </div>
+                        <div class="col-12">
+                             <label for="email">Email</label>
                              <input type="text" name="email"  value="<%= user.email %>" class="form-control" placeholder="email">
                         </div>
                         <div class="col-12">
-                             <label for="password">password</label>
+                             <label for="password">Password</label>
                              <input type="password" name="password" class="form-control" placeholder="password">
                         </div>
                         <div class="col-12">
-                            <label for="confirm_password">confirm password</label>
+                            <label for="confirm_password">Confirm password</label>
                             <input type="password" name="confirm_password" class="form-control" placeholder="confirm password">
                        </div>
                         <div class="col-12">
@@ -54,7 +62,7 @@
                         </div>
                         <hr class="mt-4">
                         <div class="col-12">
-                            <p class="text-center mb-0">Have an account? <a href="/auth/login">Sigin</a></p>
+                            <p class="text-center mb-0">Have an account? <a href="/auth/login">Sig in</a></p>
                         </div>
                     </form>                                       
                 </div>

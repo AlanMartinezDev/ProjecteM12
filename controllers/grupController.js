@@ -3,6 +3,8 @@ var User = require("../models/user");
 
 const { body, validationResult } = require("express-validator");
 
+const entities = require("entities");
+
 class GrupController {
     static rules = [
         // Validate and sanitize fields.
@@ -48,7 +50,7 @@ class GrupController {
               }
               console.log(list); // imprime los resultados en la consola para depurar
               // Tot ok: mostra el llistat
-              return res.render('grups/list',{list:list})
+              return res.render('grups/list',{list:list, htmlDecode: entities.decode})
         }); 
     }
 
@@ -70,7 +72,7 @@ class GrupController {
           // mostrem el formulari i li passem les dades necessàries
           return res.render('grups/new',
             {usersList:users_list,
-             grups: grup
+             grups: grup, htmlDecode: entities.decode
             })
       }
       catch(error) {
@@ -105,7 +107,7 @@ class GrupController {
         res.render('grups/new',
               {usersList:users_list,
                errors: errors.array(),
-               grups:req.body})
+               grups:req.body, htmlDecode: entities.decode})
       }
       catch(error) {
           var err = new Error("There was a problem showing the new book form");
@@ -157,7 +159,7 @@ class GrupController {
         // Successful, so render.
         res.render("grups/update", { 
                   grups: grup, 
-                  usersList:users_list });
+                  usersList:users_list, htmlDecode: entities.decode });
         
     }
     catch(error) {
@@ -200,7 +202,7 @@ class GrupController {
           res.render('grups/update',
                 { grups: grup, 
                   errors: errors.array(),
-                  usersList:users_list });                 
+                  usersList:users_list, htmlDecode: entities.decode });                 
       }
       else
       {           
