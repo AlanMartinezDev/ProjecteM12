@@ -11,7 +11,7 @@ var ConvocatoriaSchema = new Schema({
     puntsOrdreDia: [{ type: String, required: true }],
     convocats: [{ type: Schema.ObjectId, ref: "Grup" }],
     plantilla: { type: Schema.ObjectId, ref: "Plantilla" },
-    responsable: [{ type: Schema.ObjectId, ref: "User", required: false }]
+    responsable: { type: Schema.ObjectId, ref: "User", required: false }
   });
   
   ConvocatoriaSchema.plugin(mongoosePaginate);

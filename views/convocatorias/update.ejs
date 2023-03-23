@@ -9,10 +9,21 @@
   <%- include('../partials/header'); %>
 </header>
 <main>
+  <% function formatDate(date) {
+    let d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    let year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  } %>
 	<div class="row mt-5">
     <div class="col">
 	    	<h1 class="display-5">
-	    		<strong>Update Grup</strong>
+	    		<strong>Editar convocatòria</strong>
 	    	</h1>
 				<% if (typeof errors !== "undefined") { %>			
 					<div class="alert alert-danger mt-2" role="alert">		  
@@ -25,44 +36,39 @@
 		<div class="col">
 			<form method="POST" action="/convocatorias/update/<%= convo.id %>">
 				<div class="form-group">
-                    <label for="data">Fecha:</label>
-                    <input type="date" name="data" value="<%= convo.data %>">
+                    <label for="data">Data:</label>
+                    <input type="date" name="data" value="<%= formatDate(convo.data) %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
-                    <label for="horaInici">Hora de inicio:</label>
-                    <input type="time" name="horaInici" value="<%= convo.horaInici %>">
+                    <label for="horaInici">Hora d'inici:</label>
+                    <input type="time" name="horaInici" value="<%= convo.horaInici %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
                     <label for="durada">Duración:</label>
-                    <input type="number" name="durada" value="<%= convo.durada %>"><br>
+                    <input type="number" name="durada" value="<%= convo.durada %>" class="form-control" required><br>
                </div>
-               <br>
                <div class="form-group">
                     <label for="lloc">Lugar:</label>
-                    <input type="text" name="lloc" value="<%= convo.lloc %>"><br>
+                    <input type="text" name="lloc" value="<%= convo.lloc %>" class="form-control" required><br>
                </div>
-               <br>
-               <div class="form-group">
-                    
-               </div>
-               <br>
                 <div class="form-group">
                     <label for="convocats">Convocats</label>
-                    <select name="convocats[]" multiple class="form-control">
-                        <% grupsList.forEach(function(grup) { %>
-                            <% if (convo.convocats.includes(grup.id)) { %>
-                              <option selected value="<%= grup.id %>"><%= grup.nom %></option>
-                            <% } else { %>
-                              <option value="<%= grup.id %>"><%= grup.nom %></option>
-                            <% } %>
-                          <% }); %>
+                    <select name="convocats[]" multiple class="form-control" required>
+                      <% grupsList.forEach(function(grup) { %>
+                        <% if (convocats.find(convocat => convocat._id.toString() === grup._id.toString())) { %>
+                          <option selected value="<%= grup._id %>"><%= grup.nom %></option>
+                        <% } else { %>
+                          <option value="<%= grup._id %>"><%= grup.nom %></option>
+                        <% } %>
+                      <% }); %>
                     </select>
+                    
                 </div>
                 <div class="form-group">
                     <label for="plantilla">Plantilla</label>
-                    <select name="plantilla" multiple class="form-control">
+                    <select name="plantilla" class="form-control">
                         <% plantillasList.forEach(function(plantilla) { %>
                             <% if (convo.plantilla == plantilla.id) { %>
                               <option selected value="<%= plantilla.id %>"><%= plantilla.nom %></option>
@@ -71,6 +77,18 @@
                             <% } %>
                           <% }); %>
                     </select>
+                </div>
+                <div class="form-group">
+                  <label for="responsable">Responsable</label>
+                  <select name="responsable" class="form-control">
+                    <% usersList.forEach(function(usuario) { %>
+                      <% if(convo.responsable.id == usuario.id) { %>
+                        <option selected value="<%= usuario.id %>"><%= usuario.nom %></option>
+                      <% } else { %>
+                        <option value="<%= usuario.id %>"><%= usuario.nom %></option>
+                      <% } %> 
+                    <% }); %>
+                  </select>
                 </div>
 
                 <div class="mb-3">
