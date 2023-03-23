@@ -77,12 +77,14 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
     convocatoriasJSON.convocatorias[0].horaInici = "09:10";
     convocatoriasJSON.convocatorias[0].convocats = grups[0].id;
     convocatoriasJSON.convocatorias[0].plantilla = plantilles[0].id;
+    convocatoriasJSON.convocatorias[0].responsable = users[0].id;
 
     convocatoriasJSON.convocatorias[1].data = currentDate;
     //convocatoriasJSON.convocatorias[1].horaInici = currentDate;
     convocatoriasJSON.convocatorias[1].horaInici = "08:10";
     convocatoriasJSON.convocatorias[1].convocats = grups[1].id;
     convocatoriasJSON.convocatorias[1].plantilla = plantilles[1].id;
+    convocatoriasJSON.convocatorias[1].responsable = users[1].id;
 
     var convocatorias = await Convocatoria.insertMany(convocatoriasJSON.convocatorias);
 

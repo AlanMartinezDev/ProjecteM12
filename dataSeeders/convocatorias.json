@@ -6,7 +6,8 @@
           "lloc" : "Aula C001",
           "puntsOrdreDia" : [ "Notes","Excepcions" ],
           "convocats" : [],
-          "plantilla" : ""
+          "plantilla" : "",
+          "responsable" : ""
         },
         { "data" : "", 
           "horaInici" : "",
@@ -14,7 +15,8 @@
           "lloc" : "Aula C002",
           "puntsOrdreDia" : [ "Conductes","Estat de l'alumnat" ],
           "convocats" : [],
-          "plantilla" : ""
+          "plantilla" : "",
+          "responsable" : ""
         }
     ]
 }

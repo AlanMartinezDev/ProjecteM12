@@ -1,6 +1,7 @@
 var Convocatoria = require("../models/convocatoria");
 var Grup = require("../models/grup");
 var Plantilla = require("../models/plantilla");
+var User = require("../models/user");
 
 const { body, validationResult } = require("express-validator");
 
@@ -17,7 +18,8 @@ class convocatoriaController {
             path: 'membres',
             model : 'User'
         }})  // Carregar les dades de l'objecte Publisher amb el que està relacionat    
-        .populate('plantilla') // i les de tots els objectes gèneres relaciponats
+        .populate('plantilla')
+        .populate('responsable') // i les de tots els objectes gèneres relaciponats
         .exec(function (err, list) {
           // En cas d'error
           if (err) {
@@ -50,7 +52,8 @@ class convocatoriaController {
             lloc: '',
             puntsOrdreDia: [],
             convocats: [],
-            plantilla: ''
+            plantilla: '',
+            responsable: ''
         };
         
         // mostrem el formulari i li passem les dades necessàries
@@ -154,31 +157,35 @@ class convocatoriaController {
   }
 
   static async update_get(req, res, next) {
-
     try {
-        const grups_list = await Grup.find();
-        const plantillas_list = await Plantilla.find();
-        const convocatoria = await Convocatoria.findById(req.params.id) 
-            .populate({
-              path: 'convocats',
-              model: 'Grup',
-          populate : {
+      const users_list = await User.find();
+      const grups_list = await Grup.find();
+      const plantillas_list = await Plantilla.find();
+      const convocatoria = await Convocatoria.findById(req.params.id) 
+          .populate({
+            path: 'convocats',
+            model: 'Grup',
+            populate: {
               path: 'membres',
               model : 'User'
-          }})  // Carregar les dades de l'objecte Publisher amb el que està relacionat    
-          .populate('plantilla') 
-          
-        if (convocatoria == null) { // No results                
-          var err = new Error("Convocatoria not found");
-          err.status = 404;
-          return next(err);
-        }
-        // Successful, so render.
-        res.render("convocatorias/update", { 
-                  convo: convocatoria, 
-                  grupsList:grups_list,
-                  plantillasList:plantillas_list });
-        
+            }
+          })
+          .populate('plantilla')
+          .populate('responsable')
+            
+      if (convocatoria == null) { // No results                
+        var err = new Error("Convocatoria not found");
+        err.status = 404;
+        return next(err);
+      }
+  
+      res.render("convocatorias/update", { 
+        convo: convocatoria, 
+        grupsList: grups_list,
+        plantillasList: plantillas_list,
+        usersList: users_list,
+        convocats: convocatoria.convocats // Nueva variable que contiene la lista de convocados
+      });
     }
     catch(error) {
       var err = new Error("There was an unexpected problem showing the selected convocatoria");
@@ -186,13 +193,12 @@ class convocatoriaController {
       err.status = 404;
       next(err)
     }
-    
   }
 
   static async update_post(req, res, next) {
 
     try {
-
+      const users_list = await User.find();
       const grups_list = await Grup.find();
       const plantillas_list = await Plantilla.find();
 
@@ -217,6 +223,7 @@ class convocatoriaController {
           puntsOrdreDia: punts,
           convocats: grups,
           plantilla: req.body.plantilla,
+          responsable: req.body.responsable,
           _id: req.params.id, // This is required, or a new ID will be assigned!
       });
 
@@ -245,11 +252,7 @@ class convocatoriaController {
               if (err) {
                 return next(err);
               }
-              res.render('convocatorias/update',
-                  { convo: convocatoria, 
-                    message: 'Convocatorias Updated',
-                    grupsList:grups_list,
-                    plantillasList:plantillas_list });
+              res.redirect('/convocatorias');
             
             });
       }
