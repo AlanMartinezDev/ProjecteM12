@@ -29,12 +29,12 @@
 		  	<tbody>
 		  		<% list.forEach(function(grup) { %>
 				    <tr>		      
-				      <td><%= grup.nom %></td>
-				      <td><%= grup.tipus %></td>
+				      <td><%= htmlDecode(grup.nom) %></td>
+				      <td><%= htmlDecode(grup.tipus) %></td>
 				      <td>
 				      			
 				      			<% grup.membres.forEach(function(usuario) { %>
-				      				  <span class="badge text-bg-secondary"><%= usuario.nom %>, <%= usuario.cognom %></span>
+				      				  <span class="badge text-bg-secondary"><%= htmlDecode(usuario.nom) %>, <%= htmlDecode(usuario.cognom) %></span>
 
 				      					
 				      			<% }); %>

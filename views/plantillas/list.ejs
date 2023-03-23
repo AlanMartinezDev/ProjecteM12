@@ -71,7 +71,7 @@
 						<tbody>
 							<%  result.docs.forEach( function(results) { %>
 								<tr>		      
-								<td><%= results.nom %></td>
+								<td><%= htmlDecode(results.nom) %></td>
 								<td>					      	
 									<a  href="/plantillas/update/<%=results._id%>" class="link-secondary">
 										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
