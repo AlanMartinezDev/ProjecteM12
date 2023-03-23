@@ -53,17 +53,17 @@
                         </div>
         
                         <div class="form-group">
-                            <label for="membres">Membres</label>
-                            <select name="membres[]" multiple class="form-control">
-                              <% usersList.forEach(function(usuario) { %>
-                                <% if(grups.membres.includes(usuario.id)) { %>
-                                  <option selected value="<%= usuario.id %>"><%= usuario.nom %></option>
-                                <% } else { %>
-                                  <option value="<%= usuario.id %>"><%= usuario.nom %></option>
-                                <% } %> 
-                              <% }); %>
-                            </select>
-                          </div>
+                          <label for="membres">Membres</label>
+                          <select name="membres[]" multiple class="form-control">
+                            <% usersList.forEach(function(usuario) { %>
+                              <% if(grups.membres.some(member => member.id == usuario.id)) { %>
+                                <option selected value="<%= usuario.id %>"><%= usuario.nom %></option>
+                              <% } else { %>
+                                <option value="<%= usuario.id %>"><%= usuario.nom %></option>
+                              <% } %> 
+                            <% }); %>
+                          </select>
+                        </div>
             
                           <div class="form-group">
                             <label for="tipus">Tipus</label>
