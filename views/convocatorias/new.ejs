@@ -12,7 +12,7 @@
 	<div class="row mt-5">
     <div class="col">
 	    	<h1 class="display-5">
-	    		<strong>New Grup</strong>
+	    		<strong>Nova convocatoria</strong>
 	    	</h1>
 				<% if (typeof errors !== "undefined") { %>			
 					<div class="alert alert-danger mt-2" role="alert">		  
@@ -25,23 +25,23 @@
 		<div class="col">
 			<form method="POST" action="/convocatorias/create">
 				<div class="form-group">
-                    <label for="data">Fecha:</label>
-                    <input type="date" name="data" value="<%= convo.data %>">
+                    <label for="data">Data:</label>
+                    <input type="date" name="data" value="<%= convo.data %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
-                    <label for="horaInici">Hora de inicio:</label>
-                    <input type="time" name="horaInici" value="<%= convo.horaInici %>">
+                    <label for="horaInici">Hora d'inici:</label>
+                    <input type="time" name="horaInici" value="<%= convo.horaInici %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
-                    <label for="durada">Duración:</label>
-                    <input type="number" name="durada" value="<%= convo.durada %>"><br>
+                    <label for="durada">Durada en minuts:</label>
+                    <input type="number" min="0" step="60" name="durada" value="<%= convo.durada %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
-                    <label for="lloc">Lugar:</label>
-                    <input type="text" name="lloc" value="<%= convo.lloc %>"><br>
+                    <label for="lloc">Lloc:</label>
+                    <input type="text" name="lloc" value="<%= convo.lloc %>" class="form-control" required>
                </div>
                <br>
                <div class="form-group">
@@ -50,7 +50,7 @@
                <br>
                 <div class="form-group">
                     <label for="convocats">Convocats</label>
-                    <select name="convocats[]" multiple class="form-control">
+                    <select name="convocats[]" multiple class="form-control" required>
                     <% grupsList.forEach(function(grup) { %>
                         <option value="<%= grup.id %>"><%= grup.nom %></option>
                     <% }); %>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="plantilla">Plantilla</label>
-                    <select name="plantilla" multiple class="form-control">
+                    <select name="plantilla" multiple class="form-control" required>
                     <% plantillasList.forEach(function(plantilla) { %>
                         <option value="<%= plantilla.id %>"><%= plantilla.nom %></option>
                     <% }); %>
@@ -66,13 +66,13 @@
                 </div>
 
                 <div class="mb-3">
-					<label class="form-label">Orden del día</label>
-					<input type="text" name="puntsOrdreDia[]" class="form-control">
+					<label class="form-label">Ordre del dia</label>
+					<input type="text" name="puntsOrdreDia[]" class="form-control" required>
 				</div>
                 
-				<button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" id="addOrdreDia" class="btn btn-secondary">Agregar Orden del Día</button>
-                <button type="button" id="deleteOrdreDia" class="btn btn-danger">Borrar Orden del Día</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" id="addOrdreDia" class="btn btn-secondary">Afegir ordre del dia</button>
+        <button type="button" id="deleteOrdreDia" class="btn btn-danger">Borrar ordre del dia</button>
 
 			</form>
 		</div>
@@ -85,10 +85,11 @@
           input.name = "puntsOrdreDia[]";
           input.classList.add("form-control");
           input.classList.add("mb-3");
+          input.required = true;
         
           let label = document.createElement("label");
           label.classList.add("form-label");
-          label.innerHTML = "Orden del día";
+          label.innerHTML = "Ordre del dia";
         
           let form = document.querySelector("form");
           form.insertBefore(input, document.querySelector("button[type='submit']"));
