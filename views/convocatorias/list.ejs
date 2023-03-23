@@ -11,36 +11,35 @@
 
 <main>
 	<div class="container">
-   	    <h1 class="display-3">Grups</h1>
-
-								 
+   	    <h1 class="display-3 mt-3">Convocatòries</h1>
 		<div class="table-responsive">		      	 
 		<table class="table table-striped ">
 	  		<thead>
 			    <tr>		      
 			      <th scope="col">Data</th>
-			      <th scope="col">Hora Inici</th>
+			      <th scope="col">Hora d'inici</th>
 			      <th scope="col">Durada</th>
+				  <th scope="col">Responsable</th>
                   <th scope="col">Plantilla</th>
                   <th scope="col">Ordres</th>
                   <th scope="col">Convocats</th>
 			      <th scope="col">			      	
-				      <a href="/convocatorias/create" class="btn btn-primary">New</a>
+				      <a href="/convocatorias/create" class="btn btn-primary">Nova convocatòria</a>
 			      </th>
 			    </tr>
 	  	</thead>
 		  	<tbody>
 		  		<% list.forEach(function(convocatoria) { %>
 				    <tr>		      
-				      <td><%= convocatoria.data %></td>
-				      <td><%= convocatoria.horaInici %></td>
-                      <td><%= convocatoria.durada %></td>
-                      <td><%= convocatoria.plantilla.nom %></td>
+					  <td><%= new Date(convocatoria.data).toLocaleDateString('es-ES') ? new Date(convocatoria.data).toLocaleDateString('es-ES') : 'N/A' %></td>
+				      <td><%= convocatoria.horaInici ? convocatoria.horaInici : 'N/A' %></td>
+                      <td><%= convocatoria.durada ? convocatoria.durada : 'N/A' %></td>
+					  <td><%= convocatoria.responsable ? convocatoria.responsable.nom : 'N/A' %></td>
+					  <td><%= convocatoria.plantilla ? convocatoria.plantilla.nom : 'N/A' %></td>					  
                       <td>
                         
                         <% convocatoria.puntsOrdreDia.forEach(function(ordre) { %>
                         <span class="badge text-bg-secondary"><%= ordre %></span>
-
                         <% }); %>
                       </td>
 				      <td>
@@ -53,7 +52,7 @@
 				      		
 				      </td>
 				      <td>
-				      	<a href="/convocatorias/update/<%=convocatoria._id%>" class="btn btn-secondary">Edit</a>
+				      	<a href="/convocatorias/update/<%=convocatoria._id%>" class="btn btn-secondary">Editar</a>
 				      	
 				      </td>		      
 				    </tr>
