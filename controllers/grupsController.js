@@ -48,7 +48,7 @@ class GrupController {
                 // i delega el seu tractament al gestor d'errors
                 return next(err);
               }
-              console.log(list); // imprime los resultados en la consola para depurar
+              //console.log(list); // imprime los resultados en la consola para depurar
               // Tot ok: mostra el llistat
               return res.render('grups/list',{list:list, htmlDecode: entities.decode})
         }); 

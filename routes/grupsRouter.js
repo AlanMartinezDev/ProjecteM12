@@ -2,7 +2,7 @@ var express = require("express");
 var middelware = require("../middlewares/authenticate");
 var router = express.Router();
 
-const grup_controller = require("../controllers/grupController");
+const grup_controller = require("../controllers/grupsController");
 
 router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 

@@ -5,6 +5,7 @@ var User = require("../models/user");
 
 const { body, validationResult } = require("express-validator");
 
+const entities = require("entities");
 
 class convocatoriaController {
 
@@ -30,7 +31,7 @@ class convocatoriaController {
             return next(err);
           }
           // Tot ok: mostra el llistat
-          return res.render('convocatorias/list',{list:list})
+          return res.render('convocatorias/list',{list:list, htmlDecode: entities.decode})
     }); 
 
   }
@@ -60,7 +61,7 @@ class convocatoriaController {
         return res.render('convocatorias/new',
           {grupsList:grups_list,
            plantillasList:plantillas_list,
-           convo: convocatoria
+           convo: convocatoria, htmlDecode: entities.decode
           })
     }
     catch(error) {
@@ -92,7 +93,7 @@ class convocatoriaController {
               {grupsList:grups_list,
                plantillasList:plantillas_list,
                errors: errors.array(),
-               convocatoria:req.body})
+               convocatoria:req.body, htmlDecode: entities.decode})
       }
       catch(error) {
           var err = new Error("There was a problem showing the new convocatoria form");
@@ -184,7 +185,7 @@ class convocatoriaController {
         grupsList: grups_list,
         plantillasList: plantillas_list,
         usersList: users_list,
-        convocats: convocatoria.convocats // Nueva variable que contiene la lista de convocados
+        convocats: convocatoria.convocats, htmlDecode: entities.decode // Nueva variable que contiene la lista de convocados
       });
     }
     catch(error) {
@@ -239,7 +240,7 @@ class convocatoriaController {
                 { convo: convocatoria, 
                   errors: errors.array(),
                   grupsList:grups_list,
-                  plantillasList:plantillas_list });                 
+                  plantillasList:plantillas_list, htmlDecode: entities.decode });                 
       }
       else
       {           
