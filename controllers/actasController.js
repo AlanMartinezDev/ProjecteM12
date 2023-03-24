@@ -19,7 +19,7 @@ class ActaController {
           err.status = 404;
           return next(err);
         }
-        return res.render('actas/list', { list: list })
+        return res.render('actas/list', { list: list, htmlDecode: entities.decode })
       });
   }
 
@@ -121,7 +121,7 @@ class ActaController {
       res.render("actas/update", {
         actas: acta,
         convocatoriaList: convocatoria_list,
-        acordList: acord_list
+        acordList: acord_list, htmlDecode: entities.decode
       }); // Añadir acordList a la vista
 
     }
@@ -185,7 +185,7 @@ class ActaController {
                 actas: acta,
                 message: 'Acta Updated',
                 convocatoriaList: convocatoria_list,
-                acordList: acord_list
+                acordList: acord_list, htmlDecode: entities.decode
               }); // Añadir acordList a la vista
 
           });

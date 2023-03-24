@@ -21,6 +21,7 @@
 			      <th scope="col">Estat</th>
 			      <th scope="col">Descripcions</th>
 			      <th scope="col">Convocatoria</th>
+				  <th scope="col">Acords</th>
 			      <th scope="col">			      	
 				      <a href="/actas/create" class="btn btn-primary">New</a>
 			      </th>
@@ -36,6 +37,11 @@
                         <% }); %>
                       </td>
 				      <td><%= acta.convocatoria.lloc %></td>
+					  <td>
+                        <% acta.acords.forEach(function(acord) { %>
+                            <span class="badge text-bg-secondary"><%= acord.descripcio %></span>    
+                        <% }); %>
+                      </td>
 				      <td>
 				      	<a href="/actas/update/<%=acta._id%>" class="btn btn-secondary">Edit</a>
 				      	

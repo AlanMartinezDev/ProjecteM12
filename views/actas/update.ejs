@@ -36,7 +36,7 @@
                 <label for="convocatoria">Convocatoria</label>
                 <select name="convocatoria" class="form-control">
                 <% convocatoriaList.forEach(function(convocatoria) { %>
-                    <option value="<%= convocatoria.id %>"><%= convocatoria.lloc %></option>
+                    <option value="<%= convocatoria.id %>"><%= htmlDecode(convocatoria.lloc) %></option>
                 <% }); %>
                 </select>
             </div>
@@ -45,9 +45,22 @@
                 <div class="mb-3">
 					<label class="form-label">Descripcions</label>
                     <% actas.descripcions.forEach(function(desc) { %>
-					<input type="text" name="descripcions[]" class="form-control" value="<%= desc %>"><br>
+					<input type="text" name="descripcions[]" class="form-control" value="<%= htmlDecode(desc) %>"><br>
                     <% }); %>
 				</div>
+            </div>
+
+            <div class="form-group">
+                <label for="acords">Acords</label>
+                <select name="acords" id="acords" class="form-control" multiple>
+                    <% acordList.forEach(function(acord) { %>
+                        <% if (actas.acords.some(a => a.id === acord.id)) { %>
+                            <option selected value="<%= acord.id %>"><%= htmlDecode(acord.descripcio) %></option>
+                        <% } else { %>
+                            <option value="<%= acord.id %>"><%= htmlDecode(acord.descripcio) %></option>
+                        <% } %>
+                    <% }); %>
+                </select>
             </div>
               
 				<button type="submit" class="btn btn-primary">Save</button>
