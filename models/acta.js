@@ -13,7 +13,8 @@ var ActaSchema = new Schema({
     },
     descripcions: [{ type: String, required: true }],
     //acords: [{ type: Schema.ObjectId, ref: "Acord" }],
-    convocatoria: { type: Schema.ObjectId, ref: "Convocatoria" }
+    convocatoria: { type: Schema.ObjectId, ref: "Convocatoria" },
+    acords: [{ type: Schema.ObjectId, ref: "Acord", required: false }]
   });
   
   ActaSchema.plugin(mongoosePaginate);

@@ -34,19 +34,19 @@
 					  <td><%= new Date(convocatoria.data).toLocaleDateString('es-ES') ? new Date(convocatoria.data).toLocaleDateString('es-ES') : 'N/A' %></td>
 				      <td><%= convocatoria.horaInici ? convocatoria.horaInici : 'N/A' %></td>
                       <td><%= convocatoria.durada ? convocatoria.durada : 'N/A' %></td>
-					  <td><%= convocatoria.responsable ? convocatoria.responsable.nom : 'N/A' %></td>
-					  <td><%= convocatoria.plantilla ? convocatoria.plantilla.nom : 'N/A' %></td>					  
+					  <td><%= convocatoria.responsable ? htmlDecode(convocatoria.responsable.nom) : 'N/A' %></td>
+					  <td><%= convocatoria.plantilla ? htmlDecode(convocatoria.plantilla.nom) : 'N/A' %></td>			  
                       <td>
                         
                         <% convocatoria.puntsOrdreDia.forEach(function(ordre) { %>
-                        <span class="badge text-bg-secondary"><%= ordre %></span>
+                        <span class="badge text-bg-secondary"><%= htmlDecode(ordre) %></span>
                         <% }); %>
                       </td>
 				      <td>
 				      			
                         <% convocatoria.convocats.forEach(function(grup) { %>
                             <% grup.membres.forEach(function(usuario) { %>
-                              <span class="badge text-bg-secondary"><%= usuario.nom%>, <%= usuario.cognom %></span>
+                              <span class="badge text-bg-secondary"><%= htmlDecode(usuario.nom) %>, <%= htmlDecode(usuario.cognom) %></span>
                             <% }); %>
                           <% }); %>
 				      		

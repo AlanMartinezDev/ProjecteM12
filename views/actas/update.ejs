@@ -27,14 +27,14 @@
 			<form method="POST" action="/actas/update/<%= actas.id %>">
 				<div class="form-group">
 					 <label for="estat">Estat</label>
-                     <select name="estat" multiple class="form-control">
+                     <select name="estat" class="form-control">
                         <option value="Oberta">Oberta</option>
                         <option value="Tancada">Tancada</option>
                      </select>
 			</div>
             <div class="form-group">
                 <label for="convocatoria">Convocatoria</label>
-                <select name="convocatoria" multiple class="form-control">
+                <select name="convocatoria" class="form-control">
                 <% convocatoriaList.forEach(function(convocatoria) { %>
                     <option value="<%= convocatoria.id %>"><%= convocatoria.lloc %></option>
                 <% }); %>

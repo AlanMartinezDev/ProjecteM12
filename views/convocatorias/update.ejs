@@ -51,16 +51,16 @@
                </div>
                <div class="form-group">
                     <label for="lloc">Lugar:</label>
-                    <input type="text" name="lloc" value="<%= convo.lloc %>" class="form-control" required><br>
+                    <input type="text" name="lloc" value="<%= htmlDecode(convo.lloc) %>" class="form-control" required><br>
                </div>
                 <div class="form-group">
                     <label for="convocats">Convocats</label>
                     <select name="convocats[]" multiple class="form-control" required>
                       <% grupsList.forEach(function(grup) { %>
                         <% if (convocats.find(convocat => convocat._id.toString() === grup._id.toString())) { %>
-                          <option selected value="<%= grup._id %>"><%= grup.nom %></option>
+                          <option selected value="<%= grup._id %>"><%= htmlDecode(grup.nom) %></option>
                         <% } else { %>
-                          <option value="<%= grup._id %>"><%= grup.nom %></option>
+                          <option value="<%= grup._id %>"><%= htmlDecode(grup.nom) %></option>
                         <% } %>
                       <% }); %>
                     </select>
@@ -71,9 +71,9 @@
                     <select name="plantilla" class="form-control">
                         <% plantillasList.forEach(function(plantilla) { %>
                             <% if (convo.plantilla == plantilla.id) { %>
-                              <option selected value="<%= plantilla.id %>"><%= plantilla.nom %></option>
+                              <option selected value="<%= plantilla.id %>"><%= htmlDecode(plantilla.nom) %></option>
                             <% } else { %>
-                              <option value="<%= plantilla.id %>"><%= plantilla.nom %></option>
+                              <option value="<%= plantilla.id %>"><%= htmlDecode(plantilla.nom) %></option>
                             <% } %>
                           <% }); %>
                     </select>
@@ -83,9 +83,9 @@
                   <select name="responsable" class="form-control">
                     <% usersList.forEach(function(usuario) { %>
                       <% if(convo.responsable.id == usuario.id) { %>
-                        <option selected value="<%= usuario.id %>"><%= usuario.nom %></option>
+                        <option selected value="<%= usuario.id %>"><%= htmlDecode(usuario.nom) %></option>
                       <% } else { %>
-                        <option value="<%= usuario.id %>"><%= usuario.nom %></option>
+                        <option value="<%= usuario.id %>"><%= htmlDecode(usuario.nom) %></option>
                       <% } %> 
                     <% }); %>
                   </select>
@@ -94,7 +94,7 @@
                 <div class="mb-3">
                     <label class="form-label">Orden del día</label>
                     <% convo.puntsOrdreDia.forEach(function(punt) { %>
-                        <input type="text" name="puntsOrdreDia[]" class="form-control mb-3" value="<%= punt %>">
+                        <input type="text" name="puntsOrdreDia[]" class="form-control mb-3" value="<%= htmlDecode(punt) %>">
                     <% }); %>
                 </div>
                 
