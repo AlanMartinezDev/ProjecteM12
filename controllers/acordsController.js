@@ -27,7 +27,7 @@ class AcordController {
                     err.status = 404;
                     return next(err);
                 }
-                return res.render('acords/list', { list: list });
+                return res.render('acords/list', { list: list, htmlDecode: entities.decode });
             });
     }
 
@@ -36,7 +36,7 @@ class AcordController {
         // Fem anar la versió async-wait per recuperar dades
         // Els errors s'han de capturar amb try-catch
         try {
-            const acta_list = await Acta.find();
+            const acta_list = await Acta.find().populate('convocatoria');
 
             // En blanc, per renderitzar el formulari el primer cop
             // i que les variables existeixin a la vista
@@ -50,7 +50,7 @@ class AcordController {
 
             return res.render('acords/new', {
                 actaList: acta_list,
-                acord: acord
+                acord: acord, htmlDecode: entities.decode
             })
         }
         catch (error) {
@@ -94,7 +94,7 @@ class AcordController {
 
     static async update_get(req, res, next) {
         try {
-            const acta_list = await Acta.find();
+            const acta_list = await Acta.find().populate('convocatoria');
             const acord = await Acord.findById(req.params.id).populate('acta');
 
             if (acord == null) {
@@ -105,7 +105,7 @@ class AcordController {
 
             res.render("acords/update", {
                 acord: acord,
-                actaList: acta_list
+                actaList: acta_list, htmlDecode: entities.decode
             });
 
         }
@@ -145,12 +145,7 @@ class AcordController {
                         if (err) {
                             return next(err);
                         }
-                        res.render('acords/update',
-                            {
-                                acord: acord,
-                                message: 'Acuerdo actualizado',
-                                actaList: acta_list
-                            });
+                        res.redirect('/acords');
                     });
             }
         }

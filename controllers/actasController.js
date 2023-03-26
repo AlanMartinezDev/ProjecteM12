@@ -180,13 +180,7 @@ class ActaController {
             if (err) {
               return next(err);
             }
-            res.render('actas/update',
-              {
-                actas: acta,
-                message: 'Acta Updated',
-                convocatoriaList: convocatoria_list,
-                acordList: acord_list, htmlDecode: entities.decode
-              }); // Añadir acordList a la vista
+            res.redirect('/actas');
 
           });
       }
