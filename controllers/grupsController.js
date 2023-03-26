@@ -215,10 +215,7 @@ class GrupController {
               if (err) {
                 return next(err);
               }
-              res.render('grups/update',
-                  { grups: grup, 
-                    message: 'Grup Updated',
-                    usersList:users_list });
+              res.redirect('/grups');
             
             });
       }

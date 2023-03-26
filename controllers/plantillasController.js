@@ -129,7 +129,7 @@ class PlantillaController {
 
           }
 
-          res.render("plantillas/update", { plantilla: plantilla, htmlDecode: entities.decode, message: 'Plantilla Updated' });
+          res.redirect('/plantillas');
         }
       );
     }
