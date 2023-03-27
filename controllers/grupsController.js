@@ -25,6 +25,17 @@ class GrupController {
       .withMessage("El miembro seleccionado no es válido.")
   ];
 
+  static async apiList(req, res, next) {
+    Grup.find()
+      .populate("membres")
+      .exec(function (err, list) {
+        if (err) {
+          return res.status(500).json({ error: "Error al obtener la lista de grupos." });
+        }
+        return res.status(200).json(list);
+      });
+  }
+
   static async list(req, res, next) {
     Grup.find()
       .populate('membres')  // Carregar les dades de l'objecte Publisher amb el que està relacionat

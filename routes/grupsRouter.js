@@ -8,6 +8,8 @@ const grup_controller = require("../controllers/grupsController");
 
 router.get("/", grup_controller.list);
 
+router.get("/api", grup_controller.apiList);
+
 router.get("/create", grup_controller.create_get);
 router.post("/create", grup_controller.rules,grup_controller.create_post);
 
