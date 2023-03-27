@@ -9,13 +9,13 @@ router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 router.get("/", acta_controller.list);
 
 router.get("/create", acta_controller.create_get);
-router.post("/create", acta_controller.create_post);
+router.post("/create", acta_controller.rules, acta_controller.create_post);
 
 router.get("/delete/:id", acta_controller.delete_get);
 router.post("/delete/:id", acta_controller.delete_post);
 
 router.get("/update/:id", acta_controller.update_get);
-router.post("/update/:id", acta_controller.update_post);
+router.post("/update/:id", acta_controller.rules, acta_controller.update_post);
 
 
 module.exports = router;

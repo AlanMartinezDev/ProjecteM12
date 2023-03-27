@@ -5,25 +5,26 @@ const { body, validationResult } = require("express-validator");
 const entities = require("entities");
 
 class PlantillaController {
-
   static rules = [
-    body("name")
-      .trim()
-      .isLength({ min: 1 })
-      .withMessage('Name must not be empty.')
+    body("nom")
+      .notEmpty()
+      .withMessage("El nombre no puede estar vacío.")
       .isLength({ max: 20 })
-      .withMessage('Name is too long.')
-      .escape()
+      .withMessage("El nombre no puede tener más de 20 caracteres.")
       .custom(async function (value, { req }) {
-
         const plantilla = await Plantilla.findOne({ nom: value });
         if (plantilla) {
           if (req.params.id !== plantilla.id) {
-            throw new Error('This plantilla name already exists.');
+            throw new Error("Este nombre de plantilla ya existe.");
           }
         }
         return true;
-      })
+      }),
+    body("puntsOrdreDia.*")
+      .notEmpty()
+      .withMessage("El punto del orden del día no puede estar vacío.")
+      .isLength({ max: 200 })
+      .withMessage("El punto del orden del día no puede tener más de 200 caracteres."),
   ];
 
   static async list(req, res, next) {
@@ -54,18 +55,17 @@ class PlantillaController {
 
   static create_post(req, res, next) {
 
-    console.log(req.body)
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       var plantilla = {
-        "nom": req.body.name,
+        "nom": req.body.nom,
         "puntsOrdreDia": req.body.puntsOrdreDia
       }
       res.render('plantillas/new', { errors: errors.array(), plantilla: plantilla })
     }
     else {
-      var nom = req.body.name;
+      var nom = req.body.nom;
       var puntsOrdreDia = req.body.puntsOrdreDia;
 
       var newPlantilla = new Plantilla({
@@ -105,7 +105,7 @@ class PlantillaController {
     const errors = validationResult(req);
 
     var plantilla = new Plantilla({
-      nom: req.body.name,
+      nom: req.body.nom,
       puntsOrdreDia: req.body.puntsOrdreDia,
       _id: req.params.id,
     });
@@ -118,7 +118,7 @@ class PlantillaController {
       Plantilla.findByIdAndUpdate(
         req.params.id,
         {
-          nom: req.body.name,
+          nom: req.body.nom,
           puntsOrdreDia: req.body.punts
         },
         { runValidators: true },

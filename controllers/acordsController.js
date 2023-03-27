@@ -6,6 +6,28 @@ const { body, validationResult } = require("express-validator");
 const entities = require("entities");
 
 class AcordController {
+    static rules = [
+        body("dataInici")
+            .notEmpty()
+            .withMessage("La fecha de inicio no puede estar vacía.")
+            .isISO8601()
+            .withMessage("La fecha de inicio debe tener formato ISO8601 (YYYY-MM-DD)."),
+        body("dataFinal")
+            .notEmpty()
+            .withMessage("La fecha final no puede estar vacía.")
+            .isISO8601()
+            .withMessage("La fecha final debe tener formato ISO8601 (YYYY-MM-DD)."),
+        body("descripcio")
+            .notEmpty()
+            .withMessage("La descripción no puede estar vacía.")
+            .isLength({ max: 500 })
+            .withMessage("La descripción no puede tener más de 500 caracteres."),
+        body("acta")
+            .notEmpty()
+            .withMessage("Debe seleccionar un acta.")
+            .isMongoId()
+            .withMessage("El acta seleccionada no es válida."),
+    ];
 
     static async list(req, res, next) {
         Acord.find()

@@ -4,7 +4,6 @@ const { body, validationResult } = require("express-validator");
 
 
 class authController {
-
   static loginRules = [
     // Validate and sanitize fields.
     body("email")
