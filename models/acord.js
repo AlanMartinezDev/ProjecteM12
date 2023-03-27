@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var AcordSchema = new Schema({
     dataInici: { type: Date, required: true },
     dataFinal: { type: Date, required: true },
-    acta: { type: Schema.ObjectId, ref: "Acta" }
+    descripcio: { type: String, required: true },
+    acta: { type: Schema.ObjectId, ref: "Acta", required: false }
   });
   
   AcordSchema.plugin(mongoosePaginate);

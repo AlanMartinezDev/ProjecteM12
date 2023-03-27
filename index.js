@@ -10,6 +10,7 @@ var plantillasRouter = require('./routes/plantillasRouter');
 var grupsRouter = require('./routes/grupsRouter');
 var convocatoriasRouter = require('./routes/convocatoriasRouter');
 var actasRouter = require('./routes/actasRouter');
+var acordsRouter = require('./routes/acordsRouter');
 
 var app = express();
 
@@ -82,6 +83,7 @@ app.use('/plantillas', plantillasRouter);
 app.use('/grups', grupsRouter);
 app.use('/convocatorias', convocatoriasRouter);
 app.use('/actas', actasRouter);
+app.use('/acords', acordsRouter);
 app.use('/auth', authRouter);
 
 function errorResponder(err, req, res, next) {
