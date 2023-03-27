@@ -41,7 +41,11 @@
 										<% }); %>
 								</td>
 								<td>
-									<a href="/grups/update/<%=grup._id%>" class="btn btn-secondary">Edit</a>
+									<% if (locals.role.includes('professor') && grup.tipus == 'Públic') { %>
+										<input type="hidden">
+									<% } else { %>
+										<a href="/grups/update/<%=grup._id%>" class="btn btn-secondary">Edit</a>
+									<% } %>
 								</td>
 							</tr>
 							<% }); %>

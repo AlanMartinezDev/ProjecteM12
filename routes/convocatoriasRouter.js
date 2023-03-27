@@ -4,7 +4,7 @@ var router = express.Router();
 
 const convocatoria_controller = require("../controllers/convocatoriasController");
 
-router.use([middelware.isAuth,middelware.hasRole('administrador')]);
+//router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 
 router.get("/", convocatoria_controller.list);
 

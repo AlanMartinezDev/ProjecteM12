@@ -4,7 +4,7 @@ var router = express.Router();
 
 const grup_controller = require("../controllers/grupsController");
 
-router.use([middelware.isAuth,middelware.hasRole('administrador')]);
+//router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 
 router.get("/", grup_controller.list);
 

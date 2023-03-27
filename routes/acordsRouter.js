@@ -4,7 +4,7 @@ var router = express.Router();
 
 const acord_controller = require("../controllers/acordsController");
 
-router.use([middleware.isAuth, middleware.hasRole('administrador')]);
+//router.use([middleware.isAuth, middleware.hasRole('administrador')]);
 
 router.get("/", acord_controller.list);
 

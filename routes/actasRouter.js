@@ -4,7 +4,7 @@ var router = express.Router();
 
 const acta_controller = require("../controllers/actasController");
 
-router.use([middelware.isAuth,middelware.hasRole('administrador')]);
+//router.use([middelware.isAuth,middelware.hasRole('administrador')]);
 
 router.get("/", acta_controller.list);
 

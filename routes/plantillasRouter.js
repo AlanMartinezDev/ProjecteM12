@@ -4,7 +4,10 @@ var router = express.Router();
 
 const plantilla_controller = require("../controllers/plantillasController");
 
-router.use([middelware.isAuth,middelware.hasRole('administrador')]);
+//router.use([middelware.isAuth,middelware.hasRole('administrador')]);
+
+// Ejemplo
+//router.get("/rutaUsuario", middelware.isAuth, middelware.hasRole('usuario', 'administrador'), plantilla_controller.rutaUsuario);
 
 router.get("/", plantilla_controller.list);
 
