@@ -7,6 +7,28 @@ const { body, validationResult } = require("express-validator");
 const entities = require("entities");
 
 class ActaController {
+  static rules = [
+    body("estat")
+      .notEmpty()
+      .withMessage("El estado no puede estar vacío.")
+      .isIn(["Oberta", "Tancada"])
+      .withMessage("El estado debe ser 'Oberta' o 'Tancada'."),
+    body("descripcions.*")
+      .notEmpty()
+      .withMessage("La descripción no puede estar vacía.")
+      .isLength({ max: 500 })
+      .withMessage("La descripción no puede tener más de 500 caracteres."),
+    body("convocatoria")
+      .notEmpty()
+      .withMessage("Debe seleccionar una convocatoria.")
+      .isMongoId()
+      .withMessage("La convocatoria seleccionada no es válida."),
+    body("acords.*")
+      .notEmpty()
+      .withMessage("Debe seleccionar al menos un acuerdo.")
+      .isMongoId()
+      .withMessage("El acuerdo seleccionado no es válido."),
+  ];
 
   static async list(req, res, next) {
     Acta.find()

@@ -19,25 +19,3 @@ router.post("/update/:id", plantilla_controller.rules, plantilla_controller.upda
 
 
 module.exports = router;
-
-/*var express = require("express");
-var router = express.Router();
-//var Plantilla = require("../models/plantilla");
-var PlantillaController = require("../controllers/plantillasController");
-
-// Get all Plantillas
-router.get("/", PlantillaController.getAll);
-
-// Get Plantilla by ID
-router.get("/:id", PlantillaController.getById);
-
-// Create new Plantilla
-router.post("/", PlantillaController.create);
-
-// Update Plantilla by ID
-router.put("/:id", PlantillaController.update);
-
-// Delete Plantilla by ID
-router.delete("/:id", PlantillaController.delete);
-
-module.exports = router;*/

@@ -9,12 +9,12 @@ router.use([middleware.isAuth, middleware.hasRole('administrador')]);
 router.get("/", acord_controller.list);
 
 router.get("/create", acord_controller.create_get);
-router.post("/create", acord_controller.create_post);
+router.post("/create", acord_controller.rules, acord_controller.create_post);
 
 router.get("/delete/:id", acord_controller.delete_get);
 router.post("/delete/:id", acord_controller.delete_post);
 
 router.get("/update/:id", acord_controller.update_get);
-router.post("/update/:id", acord_controller.update_post);
+router.post("/update/:id", acord_controller.rules, acord_controller.update_post);
 
 module.exports = router;
